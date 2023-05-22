@@ -25,6 +25,7 @@ import { FilesModule } from './files/files.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
 import { HomeModule } from './home/home.module';
 import * as path from "path";
+import { join } from 'path';
 @Module({
   controllers: [],
   providers: [],
@@ -32,9 +33,9 @@ import * as path from "path";
       ConfigModule.forRoot({
         envFilePath: `.${process.env.NODE_ENV}.env`
       }),
-      ServeStaticModule.forRoot({
-        rootPath: path.resolve(__dirname, 'static')
-      }),
+      // ServeStaticModule.forRoot({
+      //   rootPath: path.resolve(__dirname, '..', 'public'),
+      // }),
     SequelizeModule.forRoot({
       dialect: 'postgres',
       host: process.env.POSTGRES_HOST,

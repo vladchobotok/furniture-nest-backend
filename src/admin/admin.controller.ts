@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Injectable, Post, Res, UploadedFiles, UseInterceptors} from '@nestjs/common';
+import {Body, Controller, Get, Injectable, Post, Redirect, Res, UploadedFiles, UseInterceptors} from '@nestjs/common';
 import {AdminService} from "./admin.service";
 import {CreateProductDto} from "../entity/products/dto/create-product.dto";
 import {FilesFastifyInterceptor} from "fastify-file-interceptor";
@@ -14,14 +14,16 @@ export class AdminController {
 
     @Get()
     getAdmin(){
-        return Promise.all([this.brandService.getAllBrands(), this.typeService.getAllTypes()])
+        const data = Promise.all([this.brandService.getAllBrands(), this.typeService.getAllTypes()])
+        return data
     }
 
     @Post('createProduct')
+    @Redirect('http://localhost:3000/admin')
     @UseInterceptors(FilesFastifyInterceptor("images"))
-    createProduct(@Body() dto: CreateProductDto, @UploadedFiles() images: any[], @Res() res)
+    createProduct(@Body() dto: CreateProductDto, @UploadedFiles() images: any[])
     {
-        res.redirect('/admin')
-        return this.adminService.createProduct(dto, images)
+        const data = this.adminService.createProduct(dto, images)
+        return data
     }
 }

@@ -10,11 +10,13 @@ export class HomeController {
                 private brandService: BrandsService,
                 private typeService: TypesService) {}
     @Get()
-    getHome(){
-        return Promise.all(
+    getHome()
+    {
+        const data = Promise.all(
             [this.productsService.getAllProducts(),
                 this.brandService.getAllBrands(),
                 this.typeService.getAllTypes()
             ])
+        return data
     }
 }

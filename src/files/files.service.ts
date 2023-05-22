@@ -1,14 +1,15 @@
-import {HttpException, HttpStatus, Injectable} from '@nestjs/common';
+import {HttpException, HttpStatus, Injectable, Logger} from '@nestjs/common';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as uuid from 'uuid';
+import {join} from "path";
 @Injectable()
 export class FilesService {
 
     async createFiles(file: any): Promise<string>{
         try{
             const fileName = uuid.v4() + '.jpg'
-            const filePath = path.resolve(__dirname, '..', 'static')
+            const filePath = path.resolve(__dirname, '../..', 'public')
             if(!fs.existsSync(filePath)){
                 fs.mkdirSync(filePath, {recursive: true})
             }

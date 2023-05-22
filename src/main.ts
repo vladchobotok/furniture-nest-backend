@@ -5,6 +5,7 @@ import {
   FastifyAdapter,
   NestFastifyApplication,} from '@nestjs/platform-fastify';
 import * as fastifyMultipart from 'fastify-multipart';
+import path, {join} from "path";
 async function bootstrap() {
   const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create<NestFastifyApplication>(
@@ -16,8 +17,13 @@ async function bootstrap() {
     limits: {
       attachFieldsToBody: true,
     },
+
   });
   app.enableCors()
+  app.useStaticAssets({
+    root: join(__dirname, '..', 'public'),
+    prefix: '/public/',
+  });
   await app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
 
 }

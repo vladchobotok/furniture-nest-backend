@@ -28,3 +28,5 @@ INSERT INTO "carts"("id", "userId") VALUES('1', '1');
 INSERT INTO "carts"("id", "userId") VALUES('2', '2');
 INSERT INTO "carts"("id", "userId") VALUES('3', '3');
 INSERT INTO "carts"("id", "userId") VALUES('4', '4');
+
+INSERT INTO "products"("id", "name", "price", "title", "description", "inStock", "images", "typeId", "brandId") VALUES('1', 'Bed Ornella', '4000', 'Title', 'Desc', '50','{"1d945624-c094-4353-bbc4-2b1fc9bb9d0a.jpg", "55187c8a-7c43-49b3-9b9e-47f31167a73d.jpg"}', '1', '4');
