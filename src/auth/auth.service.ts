@@ -4,6 +4,7 @@ import {UsersService} from "../entity/users/users.service";
 import {JwtService} from "@nestjs/jwt";
 import * as bcrypt from 'bcryptjs';
 import {User} from "../entity/users/users.model";
+import * as process from "process";
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
 
     async login(userDto: CreateUserDto){
         const user = await this.validateUser(userDto)
-        return this.generateToken(user);
+        return await this.generateToken(user);
     }
 
     async register(userDto: CreateUserDto){
@@ -24,13 +25,13 @@ export class AuthService {
         }
         const hashPassword = await bcrypt.hash(userDto.password, 5);
         const user = await this.userService.createUser({...userDto, password: hashPassword});
-        return this.generateToken(user);
+        return await this.generateToken(user);
     }
 
     private async generateToken(user: User){
-        const payload = {name: user.name, surname: user.surname, email: user.email, id: user.id, roles: user.roles}
+        const payload = {id: user.id, name: user.name, surname: user.surname, email: user.email,  roles: user.roles}
         return {
-            token: this.jwtService.sign(payload)
+            token: this.jwtService.sign(payload, {secret: process.env.PRIVATE_KEY})
         }
     }
 

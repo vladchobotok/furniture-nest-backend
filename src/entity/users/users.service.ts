@@ -34,6 +34,7 @@ export class UsersService {
         const role = await this.roleService.getRoleByValue(dto.value);
         if(role && user){
             await user.$add('role', role.id)
+            user.roles = [role]
             return dto;
         }
         throw new HttpException('User or role is not found', HttpStatus.NOT_FOUND)

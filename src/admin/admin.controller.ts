@@ -15,8 +15,8 @@ import {CreateProductDto} from "../entity/products/dto/create-product.dto";
 import {FilesFastifyInterceptor} from "fastify-file-interceptor";
 import {BrandsService} from "../entity/brands/brands.service";
 import {TypesService} from "../entity/types/types.service";
-import {JwtAuthGuard} from "../auth/guards/jwt-auth.guard";
 import {Roles} from "../auth/decorators/roles-auth.decorator";
+import {RolesGuard} from "../auth/guards/roles.guard";
 
 @Controller('admin')
 export class AdminController {
@@ -26,7 +26,7 @@ export class AdminController {
                 private typeService: TypesService) {}
 
     @Get()
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(RolesGuard)
     @Roles("ADMIN")
     getAdmin(){
         const data = Promise.all([this.brandService.getAllBrands(), this.typeService.getAllTypes()])
@@ -34,8 +34,8 @@ export class AdminController {
     }
 
     @Post('createProduct')
-    @Redirect('http://localhost:3000/admin')
-    @UseGuards(JwtAuthGuard)
+    @Redirect('https://localhost:3000/admin')
+    @UseGuards(RolesGuard)
     @Roles("ADMIN")
     @UseInterceptors(FilesFastifyInterceptor("images"))
     createProduct(@Body() dto: CreateProductDto, @UploadedFiles() images: any[])
