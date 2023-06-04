@@ -5,6 +5,7 @@ import {ProductsModule} from "../entity/products/products.module";
 import {FilesModule} from "../files/files.module";
 import {BrandsModule} from "../entity/brands/brands.module";
 import {TypesModule} from "../entity/types/types.module";
+import {JwtModule} from "@nestjs/jwt";
 
 @Module({
   controllers: [AdminController],
@@ -13,7 +14,8 @@ import {TypesModule} from "../entity/types/types.module";
       ProductsModule,
       FilesModule,
       BrandsModule,
-      TypesModule
+      TypesModule,
+      JwtModule
   ]
 })
 export class AdminModule {}

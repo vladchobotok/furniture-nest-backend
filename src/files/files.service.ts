@@ -12,6 +12,7 @@ export class FilesService {
             const filePath = path.resolve(__dirname, '../..', 'public')
             if(!fs.existsSync(filePath)){
                 fs.mkdirSync(filePath, {recursive: true})
+
             }
             fs.writeFileSync(path.join(filePath, fileName), file.buffer)
             return fileName;

@@ -13,9 +13,9 @@ export class HomeController {
     getHome()
     {
         const data = Promise.all(
-            [this.productsService.getAllProducts(),
-                this.brandService.getAllBrands(),
-                this.typeService.getAllTypes()
+            [this.brandService.getAllBrands(),
+                this.typeService.getAllTypes(),
+                this.productsService.getAllProducts()
             ])
         return data
     }
