@@ -31,6 +31,7 @@ import {RolesService} from "./entity/roles/roles.service";
 import {BrandsService} from "./entity/brands/brands.service";
 import {ProductsService} from "./entity/products/products.service";
 import {TypesService} from "./entity/types/types.service";
+import { ProductsPagesModule } from './products-pages/products-pages.module';
 @Module({
   controllers: [],
   providers: [],
@@ -61,6 +62,7 @@ import {TypesService} from "./entity/types/types.service";
     AdminModule,
     FilesModule,
     HomeModule,
+    ProductsPagesModule
   ],
 })
 export class AppModule implements OnModuleInit{

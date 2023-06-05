@@ -29,6 +29,6 @@ async function bootstrap() {
     secret: 'my-secret', // for cookies signature
   });
   await app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
-
 }
+
 bootstrap();

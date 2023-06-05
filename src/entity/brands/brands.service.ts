@@ -22,4 +22,9 @@ export class BrandsService {
     async getAllBrands(){
         return await this.brandRepository.findAll({include: {all: true}});
     }
+
+    async getBrandByBrandName(brandName: string){
+        const brand = await this.brandRepository.findOne({where: {brandName}})
+        return brand
+    }
 }

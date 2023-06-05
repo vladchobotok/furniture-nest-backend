@@ -18,9 +18,9 @@ export class BrandsController {
 
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
-    @Get('/:value')
-    getBrandById(@Param('value') value: number){
-        return this.brandsService.getBrandById(value)
+    @Get('/id/:id')
+    getBrandById(@Param('id') id: number){
+        return this.brandsService.getBrandById(id)
     }
 
     @Roles('ADMIN')
@@ -28,5 +28,12 @@ export class BrandsController {
     @Get('/all')
     getAll(){
         return this.brandsService.getAllBrands()
+    }
+
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
+    @Get('/:value')
+    getBrandByBrandName(@Param('value') value: string){
+        return this.brandsService.getBrandByBrandName(value)
     }
 }

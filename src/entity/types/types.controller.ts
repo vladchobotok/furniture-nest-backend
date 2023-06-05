@@ -17,9 +17,9 @@ export class TypesController {
     }
     @Roles('ADMIN')
     @UseGuards(RolesGuard)
-    @Get('/:value')
-    getTypeById(@Param('value') value: number){
-        return this.typesService.getTypeById(value)
+    @Get('/id/:id')
+    getTypeById(@Param('id') id: number){
+        return this.typesService.getTypeById(id)
     }
 
     @Roles('ADMIN')
@@ -27,5 +27,12 @@ export class TypesController {
     @Get('/all')
     getAllTypes(){
         return this.typesService.getAllTypes()
+    }
+
+    @Roles('ADMIN')
+    @UseGuards(RolesGuard)
+    @Get('/:value')
+    getTypeByTypeName(@Param('value') value: string){
+        return this.typesService.getTypeByTypeName(value)
     }
 }

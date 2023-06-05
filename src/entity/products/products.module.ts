@@ -7,6 +7,8 @@ import {Product} from "./products.model";
 import {CartsProducts} from "../carts-products/carts-products.model";
 import {FilesModule} from "../../files/files.module";
 import {JwtModule} from "@nestjs/jwt";
+import {BrandsModule} from "../brands/brands.module";
+import {TypesModule} from "../types/types.module";
 
 @Module({
   providers: [ProductsService],
@@ -14,7 +16,9 @@ import {JwtModule} from "@nestjs/jwt";
   imports: [
       SequelizeModule.forFeature([Cart, Product, CartsProducts]),
       FilesModule,
-      JwtModule
+      JwtModule,
+      BrandsModule,
+      TypesModule,
   ],
   exports: [ProductsService]
 })

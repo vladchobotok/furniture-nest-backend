@@ -17,6 +17,7 @@ import {BrandsService} from "../entity/brands/brands.service";
 import {TypesService} from "../entity/types/types.service";
 import {Roles} from "../auth/decorators/roles-auth.decorator";
 import {RolesGuard} from "../auth/guards/roles.guard";
+import {CLIENT_HOST} from "../constants/constants";
 
 @Controller('admin')
 export class AdminController {
@@ -26,17 +27,17 @@ export class AdminController {
                 private typeService: TypesService) {}
 
     @Get()
-    @UseGuards(RolesGuard)
-    @Roles("ADMIN")
+   // @UseGuards(RolesGuard)
+   // @Roles("ADMIN")
     getAdmin(){
         const data = Promise.all([this.brandService.getAllBrands(), this.typeService.getAllTypes()])
         return data
     }
 
     @Post('createProduct')
-    @Redirect('https://localhost:3000/admin')
-    @UseGuards(RolesGuard)
-    @Roles("ADMIN")
+    @Redirect(CLIENT_HOST + 'admin')
+    //@UseGuards(RolesGuard)
+   // @Roles("ADMIN")
     @UseInterceptors(FilesFastifyInterceptor("images"))
     createProduct(@Body() dto: CreateProductDto, @UploadedFiles() images: any[])
     {

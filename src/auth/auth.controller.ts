@@ -5,17 +5,17 @@ import {Roles} from "./decorators/roles-auth.decorator";
 import {JwtAuthGuard} from "./guards/jwt-auth.guard";
 import {RolesGuard} from "./guards/roles.guard";
 import {FastifyReply} from "fastify";
+import {CLIENT_HOST} from "../constants/constants";
 
 
 @Controller('')
 export class AuthController {
 
-
     constructor(private authService: AuthService) {
     }
 
     @Post('/login')
-    //@Redirect('http://localhost:3000/')
+    @Redirect(CLIENT_HOST)
     login(@Body()  userDto: CreateUserDto, @Res({ passthrough: true }) response: FastifyReply){
     let jwt: { token: string };
     return this.authService.login(userDto).then(res => {
@@ -26,19 +26,19 @@ export class AuthController {
     }
 
     @Post('/register')
-    @Redirect('http://localhost:3000/login')
+    @Redirect(CLIENT_HOST + 'login')
     register(@Body()  userDto: CreateUserDto){
         return this.authService.register(userDto);
     }
 
     @Post('/logout')
-    @Redirect('http://localhost:3000/')
+    @Redirect(CLIENT_HOST)
     logout(){
         return ;
     }
 
-    @UseGuards(RolesGuard)
-    @Roles("USER")
+   // @UseGuards(RolesGuard)
+    //@Roles("USER")
     @Get('/profile')
     getProfile(){
         return ;
